@@ -1,0 +1,57 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = privatelink-s4-test
+## language=nodejs; multitenant=false
+## approuter=
+_schema-version: '3.1'
+ID: privatelink-s4-test
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+   
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install --production
+      - npx -p @sap/cds-dk cds build --production
+
+modules:
+ # --------------------- SERVER MODULE ------------------------
+ - name: privatelink-s4-test-srv
+ # ------------------------------------------------------------
+   type: nodejs
+   path: gen/srv
+   requires:
+    - name: privatelink-pl
+    - name: privatelink-dest
+    - name: privatelink-uaa
+   provides:
+    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
+      properties:
+        srv-url: ${default-url}
+
+resources:
+  # PrivateLink Service
+  - name: privatelink-pl
+    parameters:
+      service: privatelink
+      service-name: tfe-privatelink-s4
+      service-plan: standard
+    type: org.cloudfoundry.managed-service
+  # Destination Service
+  - name: privatelink-dest
+    parameters:
+      service: destination
+      service-plan: lite
+    type: org.cloudfoundry.managed-service
+  # Authorization & Trust Management
+  - name: privatelink-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-name: privatelink-uaa
+      service-plan: application
+
+
+
