@@ -8,17 +8,17 @@ Bind PrivateLink, Destination Service and XSUAA to CAP application
 
 Create Destination "BusinessPartner" use ProxyType: Internet and provide Private IP address defined in PrivateLink Service Instance.
 
-´´´bash
-Type=HTTP
-Authentication=BasicAuthentication
-WebIDEUsage=odata_abap
-Name=BusinessPartner
-WebIDEEnabled=true
-ProxyType=Internet
-URL=http\://10.220.0.4\:50000
-sap-client=400
-User=BPINST
-´´´
+  ```bash
+  Type=HTTP
+  Authentication=BasicAuthentication
+  WebIDEUsage=odata_abap
+  Name=BusinessPartner
+  WebIDEEnabled=true
+  ProxyType=Internet
+  URL=http\://10.220.0.4\:50000
+  sap-client=400
+  User=BPINST
+  ```
 
 
 ## Next Steps
