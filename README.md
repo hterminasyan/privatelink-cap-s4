@@ -20,14 +20,19 @@ Create Destination "BusinessPartner" use ProxyType: Internet and provide Private
   User=BPINST
   ```
 
+## Build MTA
 
-## Next Steps
-
-- Open a new terminal and run `cds watch` 
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+```
+mbt build 
+```
 
 
-## Learn More
+## Deploy to CF and test
+
+```
+cf deploy mta_archives/privatelink-s4-test_1.0.0.mtar
+```
+
+
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
