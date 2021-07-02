@@ -35,6 +35,12 @@ WebIDEUsage | odata_abap |
 
 > Note, **TrustAll** needed with https and if no code based approach to override verifier.
 
+## Clone Repositorry
+
+```
+git clone https://github.com/hterminasyan/privatelink-cap-s4.git 
+```
+
 ## Build MTA
 
 ```
