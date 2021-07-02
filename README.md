@@ -5,7 +5,7 @@ With SAP Private Link service, Cloud Foundry CAP applications running on SAP BTP
 
 One possible use case is to use the SAP Private Link service to communicate with an SAP S/4HANA system or other SAP or non-SAP system running on a VM in your own Azure account privately from within SAP BTP Cloud Foundry without SAP Cloud Connector.
 
-![Architecture overview](/application/src/main/webapp/priv-lnk-overview.png)
+![Architecture overview](https://github.com/hterminasyan/privatelink-cap-s4/blob/main/sap_private_link_connection_to_lb.png)
 
 PrivateLink CAP example
 
