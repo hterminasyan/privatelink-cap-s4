@@ -18,11 +18,11 @@ Property | Value |
 --- | --- |
 Name | BusinessPartner |
 Tyoe | HTTP |
-URL | https\://10.220.0.4\:44300 |
+URL | https\://10.220.0.4\:44300 (replace with your Private link Private IP) |
 Proxy Type | Internet |
 Authentication | BasicAuthentication |
-User | <username> |
-Password | <password> |
+User | <<  username >> |
+Password | <<  password >> |
 
 ### Additional Properties
 Property | Value |
