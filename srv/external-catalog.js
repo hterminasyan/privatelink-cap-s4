@@ -1,5 +1,6 @@
 
-const cds = require('@sap/cds');
+//const cds = require('@sap/cds');
+const cds = require('@sap/cds-dk')
 
 //service handlers
 module.exports = cds.service.impl(async function () {

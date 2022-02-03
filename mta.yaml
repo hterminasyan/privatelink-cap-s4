@@ -15,13 +15,16 @@ build-parameters:
      commands:
       - npm install --production
       - npx -p @sap/cds-dk cds build --production
-
+      - cp  '/home/user/projects/privatelink-cap-s4/myCA.pem' '/home/user/projects/privatelink-cap-s4/gen/srv/myCA.pem' 
+     
 modules:
  # --------------------- SERVER MODULE ------------------------
  - name: privatelink-s4-test-srv
  # ------------------------------------------------------------
    type: nodejs
    path: gen/srv
+   properties:
+     NODE_EXTRA_CA_CERTS: "/home/vcap/app/myCA.pem"
    requires:
     - name: privatelink-pl
     - name: privatelink-dest
@@ -36,7 +39,7 @@ resources:
   - name: privatelink-pl
     parameters:
       service: privatelink
-      service-name: tfe-privatelink-s4
+      service-name: tfe-cal-s4-privatelink
       service-plan: standard
     type: org.cloudfoundry.managed-service
   # Destination Service
