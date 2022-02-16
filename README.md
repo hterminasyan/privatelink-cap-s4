@@ -7,19 +7,29 @@ One possible use case is to use the SAP Private Link service to communicate with
 ![Architecture overview](https://github.com/hterminasyan/privatelink-cap-s4/blob/main/sap_private_link_connection_to_lb.png)
 
 
-## CAP Example to consume oData Service from SAP S/4HANA via Private Link connection
+## Prepare Extension Application based on CAP (SAP Cloud Application Programming Model) for PrivateLink communication
 
- - Consume external service via PrivateLink.
- - Bind PrivateLink, Destination Service and XSUAA to CAP application
- - Create Destination "BusinessPartner" use ProxyType: Internet and provide Private IP address defined in PrivateLink Service Instance.
+There are couple of steps required to enable the Private Link connection in CAP Application. 
+
+### Adapt Destination for PrivateLink Service - Configure the "BusinessPartner" destination
+
+ * Open your SAP BTP Account and navigate to your Subaccount
+ * Choose Connectivity in the menu on the left then choose Destinations
+ * Modify existing "BusinessPartner" or create new destination and enter the following information to the Destination Configuration:
+
+ Instead of using Proxy Type On-Premise for Cloud Connector connectivity, SAP introduced new Proxy Type  **PrivateLink**. Choose that proxy type and enter Private Link hostname from previous step. 
+
+ Finally add **TrustAll=true** in Additional Properites **(We will change this property in later steps)**.
+
+ > Note: If TrustAll is set to TRUE in the destination, the server certificate will not be checked for SSL connections. It is intended for test scenarios only, and should not be used in production (the server certificate will not be checked and you will not notice MITM attacks). 
   
-## Destination config
+### Destination config
 Property | Value |
 --- | --- |
 Name | BusinessPartner |
 Tyoe | HTTP |
-URL | https\://10.220.0.4\:44300 (replace with your Private link Private IP) |
-Proxy Type | Internet |
+URL | https://40a42b84-39bb-xxx-9729-287xxxxe72c.d0c0e029c004f9xxxx8eda0225a83xxxxxxaae23ff65b.p6.pls.sap.internal (replace with your PrivateLink hostname) |
+Proxy Type | PrivateLink |
 Authentication | BasicAuthentication |
 User | <<  username >> |
 Password | <<  password >> |
@@ -27,19 +37,42 @@ Password | <<  password >> |
 ### Additional Properties
 Property | Value |
 --- | --- |
-sap-client | 400 |
-TrustAll | true |
+sap-client | 400 (or the client you want to connect to) |
+TrustAll | true  (should not be used in production) |
 HTML5.DynamicDestination | true |
 WebIDEEnabled | true |
 WebIDEUsage | odata_abap |
 
-> Note, **TrustAll** needed with https and if no code based approach to override verifier.
+>Note: Not all SDK/Libraries are suppoprting the ProxyType: PrivateLink yet. For those cases use proxy type Internet instead.
 
-## Clone Repositorry
+
+### Bind application to Private Link service
+
+Open the MTA deployment descriptor and add following PrivateLink resource to your MTA and assign it to *BusinessPartnerVerification-srv*
+
+```json
+
+modules:
+  - name: privatelink-s4-test-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: private-link-s4hana
+      - ...
+
+...
+
+resources:
+  # PrivateLink Service
+  - name: private-link-s4hana
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service: privatelink 
+      service-name: private-link-s4hana # change to your instance name
+      service-plan: standard
 
 ```
-git clone https://github.com/hterminasyan/privatelink-cap-s4.git 
-```
+
 
 ## Build MTA
 
