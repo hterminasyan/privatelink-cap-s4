@@ -15,7 +15,7 @@ build-parameters:
      commands:
       - npm install --production
       - npx -p @sap/cds-dk cds build --production
-      - cp '/home/user/projects/privatelink-cap-s4/trustedca.pem' '/home/user/projects/privatelink-cap-s4/gen/srv/trustedca.pem' 
+     # - cp '/home/user/projects/privatelink-cap-s4/trustedca.pem' '/home/user/projects/privatelink-cap-s4/gen/srv/trustedca.pem' 
      
 modules:
  # --------------------- SERVER MODULE ------------------------
@@ -23,8 +23,8 @@ modules:
  # ------------------------------------------------------------
    type: nodejs
    path: gen/srv
-   properties:
-     NODE_EXTRA_CA_CERTS: "/home/vcap/app/trustedca.pem"
+   # properties:
+     # NODE_EXTRA_CA_CERTS: "/home/vcap/app/trustedca.pem"
    requires:
     - name: privatelink-pl
     - name: privatelink-dest
