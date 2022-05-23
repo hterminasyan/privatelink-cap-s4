@@ -25,7 +25,7 @@ module.exports = cds.service.impl(async function () {
             const { businessPartnerApi } = businessPartnerService();
             const anotherresult = await businessPartnerApi
             .requestBuilder()
-            .getAll().filter(businessPartnerApi.schema.BUSINESS_PARTNER_FULL_NAME.notEquals(''))
+            .getAll()
            /* .select(
                 businessPartnerApi.schema.FIRST_NAME,
                 businessPartnerApi.schema.LAST_NAME
