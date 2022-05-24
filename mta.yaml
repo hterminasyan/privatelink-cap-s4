@@ -28,6 +28,7 @@ modules:
    requires:
     - name: privatelink-pl
     - name: privatelink-dest
+    - name: privatelink-cs
     - name: privatelink-uaa
    provides:
     - name: srv-api      # required by consumers of CAP services (e.g. approuter)
@@ -55,6 +56,11 @@ resources:
       service: xsuaa
       service-name: privatelink-uaa
       service-plan: application
-
+ # Connectivity Service
+  - name: privatelink-cs
+    parameters:
+      service: connectivity
+      service-plan: lite
+    type: org.cloudfoundry.managed-service
 
 
