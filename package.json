@@ -6,19 +6,21 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "@sap-cloud-sdk/connectivity": "^2.4.0",
-        "@sap-cloud-sdk/http-client": "^2.4.0",
-        "@sap/cds": "^5.8.0",
-        "@sap/cds-dk": "4.9.3",
-        "@sap/cloud-sdk-op-vdm-business-partner-service": "^2.0.0",
+        "@sap-cloud-sdk/connectivity": "^2.8.0",
+        "@sap-cloud-sdk/http-client": "^2.8.0",
+        "@sap/cds": "^6.1.2",
+        "@sap/xssec": "^3.2.13",
         "express": "^4",
         "passport": "^0.5.2"
     },
     "devDependencies": {
-        "sqlite3": "^5.0.2"
+        "sqlite3": "^5.0.4"
     },
     "scripts": {
         "start": "cds run"
+    },
+    "engines": {
+        "node": "^16.15"
     },
     "eslintConfig": {
         "extends": "eslint:recommended",
